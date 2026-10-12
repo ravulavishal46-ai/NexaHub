@@ -23,10 +23,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1120" },
-  ],
+  // Dark is the default theme, so the browser UI matches it.
+  themeColor: "#0b1120",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

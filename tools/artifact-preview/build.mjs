@@ -61,8 +61,9 @@ const html = `<title>NexaHub Preview</title>
 <style>
 :root { --font-geist-sans: "Geist"; --font-geist-mono: "Geist Mono"; }
 html, body { min-height: 100%; }
-body { background: #f8fafc; }
-.dark body { background: #0b1120; }
+/* Dark is the default theme: avoid a white flash before the app loads. */
+body { background: #0b1120; }
+html.light body { background: #f8fafc; }
 </style>
 <style>${css}</style>
 <div id="nexahub-root"></div>

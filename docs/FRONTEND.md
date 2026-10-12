@@ -16,6 +16,9 @@ Plus a friendly 404 page, an error page, `robots.txt` and `sitemap.xml`.
 
 ## 2. Design system
 
+**Dark theme is the default.** Visitors can switch to Light or follow their device (System) from the
+theme menu; their choice is remembered.
+
 All colours live as **design tokens** (named variables) in `src/app/globals.css`, so the whole
 look — including dark mode — can be changed in one place.
 
