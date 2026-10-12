@@ -16,6 +16,7 @@ import {
   RotateCcw,
   Settings,
   ShieldHalf,
+  UserPlus,
   UserRound,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -65,23 +66,36 @@ export function UserShell({ children }: { children: ReactNode }) {
           </Link>
         </Button>
       )}
-      sidebarBottom={(collapsed, close) => (
-        <button
-          type="button"
-          onClick={() => {
-            close();
-            handleLogout();
-          }}
-          title={collapsed ? "Logout" : undefined}
-          className={cn(
-            "flex h-10 w-full cursor-pointer items-center gap-3 rounded-lg px-3 text-sm font-medium text-muted-foreground transition-colors outline-none hover:bg-danger-soft hover:text-danger focus-visible:ring-[3px] focus-visible:ring-ring/40",
-            collapsed && "justify-center px-0",
-          )}
-        >
-          <LogOut className="size-[18px]" aria-hidden />
-          <span className={cn(collapsed && "sr-only")}>Logout</span>
-        </button>
-      )}
+      sidebarBottom={(collapsed, close) => {
+        const item = cn(
+          "flex h-10 w-full cursor-pointer items-center gap-3 rounded-lg px-3 text-sm font-medium text-muted-foreground transition-colors outline-none focus-visible:ring-[3px] focus-visible:ring-ring/40",
+          collapsed && "justify-center px-0",
+        );
+        return (
+          <div className="space-y-1">
+            <Link href="/login" onClick={close} title={collapsed ? "Log in" : undefined} className={cn(item, "hover:bg-sidebar-accent hover:text-foreground")}>
+              <LogIn className="size-[18px]" aria-hidden />
+              <span className={cn(collapsed && "sr-only")}>Log in</span>
+            </Link>
+            <Link href="/register" onClick={close} title={collapsed ? "Sign up" : undefined} className={cn(item, "hover:bg-sidebar-accent hover:text-foreground")}>
+              <UserPlus className="size-[18px]" aria-hidden />
+              <span className={cn(collapsed && "sr-only")}>Sign up</span>
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                close();
+                handleLogout();
+              }}
+              title={collapsed ? "Logout" : undefined}
+              className={cn(item, "hover:bg-danger-soft hover:text-danger")}
+            >
+              <LogOut className="size-[18px]" aria-hidden />
+              <span className={cn(collapsed && "sr-only")}>Logout</span>
+            </button>
+          </div>
+        );
+      }}
       topbarRight={
         <>
           <Button variant="ghost" size="icon" asChild className="relative">
