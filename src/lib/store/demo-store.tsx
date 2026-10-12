@@ -41,7 +41,6 @@ export interface Preferences {
   emailUpdates: boolean;
   statusAlerts: boolean;
   productNews: boolean;
-  compactTables: boolean;
 }
 
 interface DemoData {
@@ -65,7 +64,6 @@ const seed = (): DemoData => ({
     emailUpdates: true,
     statusAlerts: true,
     productNews: false,
-    compactTables: false,
   },
 });
 
