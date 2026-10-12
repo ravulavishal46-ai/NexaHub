@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getCategory } from "@/lib/mock/services";
 import { cn } from "@/lib/utils";
 import type { Service } from "@/types";
+import { SaveServiceButton } from "./save-service-button";
 
 interface ServiceCardProps {
   service: Service;
@@ -27,9 +28,12 @@ export function ServiceCard({ service, requestHref, className }: ServiceCardProp
     >
       <div className="flex items-start justify-between gap-3">
         <ServiceIcon icon={service.icon} category={service.categoryId} />
-        <Badge variant="outline" className="text-muted-foreground">
-          {category?.name}
-        </Badge>
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-muted-foreground">
+            {category?.name}
+          </Badge>
+          <SaveServiceButton serviceId={service.id} serviceName={service.name} />
+        </div>
       </div>
 
       <h3 className="mt-5 text-[17px] font-semibold tracking-tight">

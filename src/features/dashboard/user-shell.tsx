@@ -7,6 +7,7 @@ import {
   Bell,
   ClipboardList,
   Compass,
+  Heart,
   History,
   LayoutDashboard,
   LogIn,
@@ -21,6 +22,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { AppShell } from "@/features/app-shell/app-shell";
+import { CommandPalette } from "@/features/app-shell/command-palette";
 import { DemoBanner } from "@/features/app-shell/demo-banner";
 import type { NavItem } from "@/features/app-shell/types";
 import { UserMenu } from "@/features/app-shell/user-menu";
@@ -35,6 +37,7 @@ export function UserShell({ children }: { children: ReactNode }) {
   const nav: NavItem[] = [
     { label: "Overview", href: "/dashboard", icon: LayoutDashboard, exact: true },
     { label: "Browse Services", href: "/dashboard/services", icon: Compass },
+    { label: "Saved", href: "/dashboard/saved", icon: Heart },
     { label: "My Requests", href: "/dashboard/requests", icon: ClipboardList },
     { label: "Request History", href: "/dashboard/history", icon: History },
     { label: "Notifications", href: "/dashboard/notifications", icon: Bell, badge: unread },
@@ -51,6 +54,7 @@ export function UserShell({ children }: { children: ReactNode }) {
   return (
     <AppShell
       nav={nav}
+      search={<CommandPalette area="user" nav={nav} />}
       areaLabel="Dashboard"
       homeHref="/dashboard"
       sidebarTop={(collapsed) => (

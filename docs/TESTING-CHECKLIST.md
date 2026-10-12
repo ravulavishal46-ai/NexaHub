@@ -62,6 +62,13 @@ repository in **Phase 6**.
 - [ ] Analytics: hover chart tooltips; "Table" toggle shows the numbers
 - [ ] Activity logs: search, category filter, sort, Export CSV
 
+### New features
+- [ ] Back arrow (top left): go Services → a service → back arrow returns to Services with your search kept
+- [ ] Open a request link directly, press the back arrow → goes up to My Requests
+- [ ] Heart a service → it appears under Dashboard → Saved; heart again removes it
+- [ ] Completed request → rate with stars + comment → admin request panel shows the feedback
+- [ ] Ctrl+K (⌘K on Mac) in the dashboard or admin → type, use ↑↓ and Enter
+
 ### Across the app
 - [ ] Light / dark / system theme
 - [ ] Keyboard only: Tab through pages, focus ring always visible, dialogs trap focus, Esc closes

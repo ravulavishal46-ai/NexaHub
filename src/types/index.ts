@@ -87,6 +87,14 @@ export interface ServiceRequest {
   createdAt: string;
   updatedAt: string;
   timeline: RequestEvent[];
+  /** Customer rating after completion (1–5 stars). */
+  feedback?: RequestFeedback;
+}
+
+export interface RequestFeedback {
+  rating: number;
+  comment?: string;
+  at: string;
 }
 
 export type UserRole = "user" | "admin";

@@ -18,6 +18,7 @@ import {
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { AppShell } from "@/features/app-shell/app-shell";
+import { CommandPalette } from "@/features/app-shell/command-palette";
 import { DemoBanner } from "@/features/app-shell/demo-banner";
 import type { NavItem } from "@/features/app-shell/types";
 import { UserMenu } from "@/features/app-shell/user-menu";
@@ -41,6 +42,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
   return (
     <AppShell
       nav={nav}
+      search={<CommandPalette area="admin" nav={nav} />}
       areaLabel="Admin"
       homeHref="/admin"
       sidebarBottom={(collapsed, close) => (

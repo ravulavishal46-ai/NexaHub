@@ -7,12 +7,22 @@ This explains how the frontend is built and why, in plain English.
 **Public website** — `/`, `/services`, `/services/[slug]`, `/about`, `/contact`
 **Sign-in screens** — `/login`, `/register`, `/forgot-password`, `/reset-password`
 **User dashboard** — `/dashboard` (overview), `/dashboard/services`, `/dashboard/requests`,
-`/dashboard/requests/new`, `/dashboard/requests/[id]`, `/dashboard/history`,
+`/dashboard/requests/new`, `/dashboard/requests/[id]`, `/dashboard/history`, `/dashboard/saved`,
 `/dashboard/notifications`, `/dashboard/profile`, `/dashboard/settings`
 **Admin prototype** — `/admin` (overview), `/admin/users`, `/admin/services`, `/admin/requests`,
 `/admin/analytics`, `/admin/activity`, `/admin/settings`
 
 Plus a friendly 404 page, an error page, `robots.txt` and `sitemap.xml`.
+
+### Extra features
+- **Back arrow** in every top bar: returns to the previous page without reloading (nothing on
+  that page is reset). If a page was opened directly, it goes one level up instead.
+- **Quick search** (`Ctrl+K` / `⌘K`, or the search box in the dashboard top bar): jump to any
+  page, service or request. Users search their own requests; admins search all requests.
+- **Saved services**: heart button on every service card and service page; saved items appear
+  under *Saved* in the dashboard.
+- **Ratings**: customers rate completed requests (1–5 stars + comment); admins see the
+  feedback in the request side panel.
 
 ## 2. Design system
 

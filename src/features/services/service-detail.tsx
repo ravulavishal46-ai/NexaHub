@@ -11,6 +11,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { getCategory } from "@/lib/mock/services";
 import { useDemoStore } from "@/lib/store/demo-store";
 import type { Service } from "@/types";
+import { SaveServiceButton } from "./save-service-button";
 import { ServiceCard } from "./service-card";
 
 const pricingCopy: Record<Service["pricing"]["model"], string> = {
@@ -157,6 +158,7 @@ export function ServiceDetail({ slug }: { slug: string }) {
                   Currently unavailable
                 </Button>
               )}
+              <SaveServiceButton serviceId={service.id} serviceName={service.name} variant="full" />
               <Button variant="ghost" asChild>
                 <Link href="/services">
                   <ArrowLeft /> Back to services

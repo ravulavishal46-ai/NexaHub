@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CalendarDays, Mail, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
 import { ServiceIcon } from "@/components/shared/service-icon";
+import { StarRating } from "@/components/shared/star-rating";
 import { PriorityLabel, StatusBadge, statusMeta } from "@/components/shared/status-badge";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -89,6 +90,19 @@ export function RequestPanel({ request }: { request: ServiceRequest }) {
           </div>
         </dl>
       </section>
+
+      {request.feedback && (
+        <section aria-labelledby="req-feedback" className="rounded-xl border border-border bg-muted/40 p-4">
+          <h3 id="req-feedback" className="text-sm font-semibold">
+            Customer feedback
+          </h3>
+          <div className="mt-2 flex items-center gap-2">
+            <StarRating value={request.feedback.rating} />
+            <span className="text-xs text-muted-foreground">{formatDate(request.feedback.at)}</span>
+          </div>
+          {request.feedback.comment && <p className="mt-2 text-sm text-muted-foreground">“{request.feedback.comment}”</p>}
+        </section>
+      )}
 
       <Separator />
 

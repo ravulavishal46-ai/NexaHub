@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import { Menu, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { BackButton } from "@/components/navigation/back-button";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -24,6 +25,8 @@ interface AppShellProps {
   sidebarBottom?: (collapsed: boolean, close: () => void) => ReactNode;
   /** Right side of the top bar (notifications, user menu…). */
   topbarRight?: ReactNode;
+  /** Search control shown at the start of the top bar's right side. */
+  search?: ReactNode;
   /** Thin notice under the top bar (prototype disclaimers). */
   banner?: ReactNode;
   children: ReactNode;
@@ -36,6 +39,7 @@ export function AppShell({
   sidebarTop,
   sidebarBottom,
   topbarRight,
+  search,
   banner,
   children,
 }: AppShellProps) {
@@ -106,7 +110,7 @@ export function AppShell({
 
       <div className={cn("flex min-h-dvh flex-col transition-[padding] duration-200", collapsed ? "lg:pl-[72px]" : "lg:pl-64")}>
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border bg-background/85 px-4 backdrop-blur-xl sm:px-6">
+        <header className="sticky top-0 z-20 flex h-16 items-center gap-2 border-b sm:gap-3 border-border bg-background/85 px-4 backdrop-blur-xl sm:px-6">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="-ml-2 lg:hidden" aria-label="Open navigation">
@@ -129,10 +133,12 @@ export function AppShell({
               {sidebarBottom && <div className="border-t border-border p-3">{sidebarBottom(false, closeMobile)}</div>}
             </SheetContent>
           </Sheet>
-          <Link href={homeHref} className="font-semibold tracking-tight lg:hidden">
+          <BackButton className="-ml-1" />
+          <Link href={homeHref} className="min-w-0 truncate font-semibold tracking-tight lg:hidden">
             {areaLabel}
           </Link>
-          <div className="ml-auto flex items-center gap-1.5">
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-1.5">
+            {search}
             <ThemeToggle />
             {topbarRight}
           </div>

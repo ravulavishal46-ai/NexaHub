@@ -51,6 +51,8 @@ interface DemoData {
   notifications: AppNotification[];
   activity: ActivityLog[];
   preferences: Preferences;
+  /** Services the user saved with the heart button. */
+  savedServiceIds: string[];
 }
 
 const seed = (): DemoData => ({
@@ -65,6 +67,7 @@ const seed = (): DemoData => ({
     statusAlerts: true,
     productNews: false,
   },
+  savedServiceIds: ["svc-network", "svc-website-audit"],
 });
 
 export interface NewRequestInput {
@@ -97,6 +100,8 @@ interface DemoStore extends DemoData {
   markAllNotificationsRead: () => void;
   /** Record an admin action in the activity log (e.g. settings changes). */
   logAdminAction: (action: string, category: ActivityLog["category"], target: string) => void;
+  toggleSavedService: (id: string) => boolean;
+  rateRequest: (id: string, rating: number, comment?: string) => void;
   resetDemo: () => void;
 }
 
@@ -341,6 +346,35 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
     [data.users, log],
   );
 
+  /** Adds or removes a saved service; returns true when it is now saved. */
+  const toggleSavedService = useCallback(
+    (id: string) => {
+      const willSave = !data.savedServiceIds.includes(id);
+      setData((d) => ({
+        ...d,
+        savedServiceIds: willSave
+          ? [id, ...d.savedServiceIds.filter((s) => s !== id)]
+          : d.savedServiceIds.filter((s) => s !== id),
+      }));
+      return willSave;
+    },
+    [data.savedServiceIds],
+  );
+
+  const rateRequest = useCallback(
+    (id: string, rating: number, comment?: string) => {
+      const at = nowIso();
+      setData((d) => ({
+        ...d,
+        requests: d.requests.map((r) =>
+          r.id === id ? { ...r, feedback: { rating, comment: comment || undefined, at } } : r,
+        ),
+      }));
+      log(currentUser.name, `Rated a completed request ${rating}/5`, "request", id);
+    },
+    [log, currentUser.name],
+  );
+
   const markNotificationRead = useCallback((id: string) => {
     setData((d) => ({
       ...d,
@@ -390,6 +424,8 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
       markNotificationRead,
       markAllNotificationsRead,
       logAdminAction,
+      toggleSavedService,
+      rateRequest,
       resetDemo,
     }),
     [
@@ -411,6 +447,8 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
       markNotificationRead,
       markAllNotificationsRead,
       logAdminAction,
+      toggleSavedService,
+      rateRequest,
       resetDemo,
     ],
   );

@@ -1,5 +1,6 @@
 import { CheckCircle2, Info } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { BackButton } from "@/components/navigation/back-button";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const points = [
@@ -13,7 +14,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     <div className="grid min-h-dvh lg:grid-cols-[1fr_minmax(0,560px)] xl:grid-cols-[1fr_640px]">
       <div className="flex flex-col">
         <header className="flex h-16 items-center justify-between px-4 sm:px-8">
-          <Logo />
+          <div className="flex items-center gap-1.5">
+            <BackButton className="-ml-2" />
+            <Logo />
+          </div>
           <ThemeToggle />
         </header>
         <main id="main" className="flex flex-1 items-center justify-center px-4 py-10 sm:px-8">

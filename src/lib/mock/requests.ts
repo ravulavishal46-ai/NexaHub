@@ -52,6 +52,13 @@ const rows: Row[] = [
   [1032, "svc-laptop", "usr-024", "2026-10-11T12:05:00Z", "pending", "high", "Liquid spill on keyboard; some keys not responding.", undefined],
 ];
 
+/** Fictional ratings left by customers on some completed requests. */
+const seedFeedback: Record<number, ServiceRequest["feedback"]> = {
+  1001: { rating: 5, comment: "Very thorough, the kitchen looks brand new.", at: "2026-08-08T12:00:00Z" },
+  1004: { rating: 4, comment: "Fan replaced quickly. Took a day longer than expected.", at: "2026-08-25T09:30:00Z" },
+  1007: { rating: 5, at: "2026-09-03T16:10:00Z" },
+};
+
 function addHours(iso: string, hours: number) {
   return new Date(new Date(iso).getTime() + hours * 3_600_000).toISOString();
 }
@@ -103,6 +110,7 @@ export const requests: ServiceRequest[] = rows
       createdAt: created,
       updatedAt: timeline[timeline.length - 1].at,
       timeline,
+      feedback: seedFeedback[id],
     } satisfies ServiceRequest;
   })
   .sort((a, b) => b.createdAt.localeCompare(a.createdAt));

@@ -20,6 +20,7 @@ import {
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RequestTimeline } from "@/features/requests/request-timeline";
+import { RateRequest } from "./rate-request";
 import { useServiceLookup } from "@/features/requests/use-service-lookup";
 import { useDemoStore } from "@/lib/store/demo-store";
 import { DEMO_USER_ID } from "@/lib/mock/users";
@@ -137,6 +138,7 @@ export function UserRequestDetail({ id }: { id: string }) {
               </dl>
             </CardContent>
           </Card>
+          {request.status === "completed" && <RateRequest request={request} />}
           {service && (
             <Card>
               <CardHeader>

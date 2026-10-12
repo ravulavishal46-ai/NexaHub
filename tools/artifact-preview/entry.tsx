@@ -30,6 +30,7 @@ import HistoryPage from "@/app/dashboard/history/page";
 import NotificationsPage from "@/app/dashboard/notifications/page";
 import ProfilePage from "@/app/dashboard/profile/page";
 import DashSettingsPage from "@/app/dashboard/settings/page";
+import SavedPage from "@/app/dashboard/saved/page";
 
 import AdminLayout from "@/app/admin/layout";
 import AdminPage from "@/app/admin/page";
@@ -57,6 +58,7 @@ const fixed: Record<string, Match> = {
   "/reset-password": { group: "auth", page: <ResetPage /> },
   "/dashboard": { group: "dashboard", page: <DashboardPage /> },
   "/dashboard/services": { group: "dashboard", page: <DashServicesPage /> },
+  "/dashboard/saved": { group: "dashboard", page: <SavedPage /> },
   "/dashboard/requests": { group: "dashboard", page: <MyRequestsPage /> },
   "/dashboard/requests/new": { group: "dashboard", page: <NewRequestPage /> },
   "/dashboard/history": { group: "dashboard", page: <HistoryPage /> },
