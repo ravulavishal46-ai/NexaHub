@@ -95,6 +95,8 @@ interface DemoStore extends DemoData {
   setUserStatus: (id: string, status: AccountStatus) => void;
   markNotificationRead: (id: string) => void;
   markAllNotificationsRead: () => void;
+  /** Record an admin action in the activity log (e.g. settings changes). */
+  logAdminAction: (action: string, category: ActivityLog["category"], target: string) => void;
   resetDemo: () => void;
 }
 
@@ -353,6 +355,12 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  const logAdminAction = useCallback(
+    (action: string, category: ActivityLog["category"], target: string) =>
+      log(DEMO_ADMIN_NAME, action, category, target),
+    [log],
+  );
+
   const resetDemo = useCallback(() => {
     try {
       window.localStorage.removeItem(STORAGE_KEY);
@@ -381,6 +389,7 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
       setUserStatus,
       markNotificationRead,
       markAllNotificationsRead,
+      logAdminAction,
       resetDemo,
     }),
     [
@@ -401,6 +410,7 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
       setUserStatus,
       markNotificationRead,
       markAllNotificationsRead,
+      logAdminAction,
       resetDemo,
     ],
   );

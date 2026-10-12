@@ -136,6 +136,7 @@ export function ServiceCatalog() {
         })}
       </div>
 
+      <h2 className="sr-only">Results</h2>
       <div className="mt-6 flex items-center justify-between text-sm">
         <p className="text-muted-foreground" aria-live="polite">
           {results.length} {results.length === 1 ? "service" : "services"} found

@@ -81,6 +81,10 @@ Think of NexaHub as a restaurant:
 
 ### 4.2 Folder layout
 
+> **Update (Phase 2 built):** the implemented structure groups screens under `src/features/`
+> (marketing, services, auth, dashboard, admin, requests, app-shell) and keeps the browser-only
+> demo store in `src/lib/store/`. See the README and `docs/FRONTEND.md` for the final layout.
+
 ```
 nexahub/
 ├── src/

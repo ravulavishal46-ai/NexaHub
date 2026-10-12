@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FilterTabs } from "@/components/ui/filter-tabs";
 import { useDemoStore } from "@/lib/store/demo-store";
 import { cn, formatRelative } from "@/lib/utils";
 import type { NotificationKind } from "@/types";
@@ -46,14 +46,15 @@ export function NotificationsList() {
           </Button>
         }
       />
-      <Tabs value={filter} onValueChange={(v) => setFilter(v as typeof filter)}>
-        <TabsList aria-label="Filter notifications">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="unread">
-            Unread <span className="text-xs text-muted-foreground tabular-nums">{unread}</span>
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
+      <FilterTabs
+        label="Filter notifications"
+        value={filter}
+        onValueChange={setFilter}
+        options={[
+          { value: "all", label: "All" },
+          { value: "unread", label: <>Unread <span className="text-xs text-muted-foreground tabular-nums">{unread}</span></> },
+        ]}
+      />
 
       {!hydrated ? (
         <div className="space-y-3">

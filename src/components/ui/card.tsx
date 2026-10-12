@@ -18,8 +18,13 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return <div className={cn("flex flex-col gap-1.5 p-5 sm:p-6", className)} {...props} />;
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"h3">) {
-  return <h3 className={cn("text-base font-semibold leading-tight", className)} {...props} />;
+/** Card titles are h2 by default (they sit directly under the page h1); pass `as` to change. */
+function CardTitle({
+  className,
+  as: Tag = "h2",
+  ...props
+}: React.ComponentProps<"h2"> & { as?: "h2" | "h3" | "h4" }) {
+  return <Tag className={cn("text-base font-semibold leading-tight", className)} {...props} />;
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"p">) {

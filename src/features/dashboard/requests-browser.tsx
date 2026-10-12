@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Pagination } from "@/components/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FilterTabs } from "@/components/ui/filter-tabs";
 import { RequestsTable } from "@/features/requests/requests-table";
 import { useServiceLookup } from "@/features/requests/use-service-lookup";
 import { useDemoStore, useMyRequests } from "@/lib/store/demo-store";
@@ -87,18 +87,22 @@ export function RequestsBrowser({ mode }: RequestsBrowserProps) {
 
       <Card className="overflow-hidden">
         <div className="flex flex-col gap-3 border-b border-border p-4 lg:flex-row lg:items-center lg:justify-between">
-          <Tabs value={status} onValueChange={(v) => resetPage(setStatus)(v as typeof status)}>
-            <TabsList aria-label="Filter by status">
-              <TabsTrigger value="all">
-                All <span className="text-xs text-muted-foreground tabular-nums">{scoped.length}</span>
-              </TabsTrigger>
-              {statuses.map((s) => (
-                <TabsTrigger key={s} value={s}>
-                  {tabLabels[s]} <span className="text-xs text-muted-foreground tabular-nums">{count(s)}</span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+          <FilterTabs
+            label="Filter by status"
+            value={status}
+            onValueChange={resetPage(setStatus)}
+            options={[
+              { value: "all" as const, label: <>All <span className="text-xs text-muted-foreground tabular-nums">{scoped.length}</span></> },
+              ...statuses.map((s) => ({
+                value: s,
+                label: (
+                  <>
+                    {tabLabels[s]} <span className="text-xs text-muted-foreground tabular-nums">{count(s)}</span>
+                  </>
+                ),
+              })),
+            ]}
+          />
           <div className="flex flex-col gap-2 sm:flex-row">
             <div className="relative sm:w-64">
               <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />

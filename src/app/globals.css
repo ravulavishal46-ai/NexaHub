@@ -25,7 +25,8 @@
   --popover: #ffffff;
   --popover-foreground: #0f172a;
   --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  /* Brand muted #64748B, deepened slightly so small text passes WCAG AA (4.5:1) on every light surface. */
+  --muted-foreground: #5b6b7f;
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #2563eb;
@@ -33,6 +34,8 @@
   /* Actions */
   --primary: #2563eb;
   --primary-foreground: #ffffff;
+  /* Blue used for text/links: darker than the button blue so it stays readable on tinted backgrounds. */
+  --primary-text: #1d4ed8;
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
   --accent: #f1f5f9;
@@ -78,8 +81,9 @@
   --input: #263449;
   --ring: #3b82f6;
 
-  --primary: #3b82f6;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
+  --primary-text: #60a5fa;
   --secondary: #1e293b;
   --secondary-foreground: #f1f5f9;
   --accent: #1e293b;
@@ -197,6 +201,11 @@
       transition-duration: 0.01ms !important;
     }
   }
+}
+
+/* Text in the brand blue uses the accessible text shade (unlayered so it wins over the utility). */
+.text-primary {
+  color: var(--primary-text);
 }
 
 @layer utilities {

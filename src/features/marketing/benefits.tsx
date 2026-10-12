@@ -1,6 +1,5 @@
 import { Accessibility, Eye, History, LayoutGrid, ShieldCheck, Tags } from "lucide-react";
 import { Reveal } from "@/components/shared/reveal";
-import { SectionHeading } from "./section-heading";
 
 const benefits = [
   {
